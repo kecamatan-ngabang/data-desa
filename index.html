@@ -164,8 +164,13 @@
               <label for="jumlahSMA">Jumlah SMA/MA/SMK</label>
               <input type="number" id="jumlahSMA" name="jumlahSMA" min="0" placeholder="0">
             </div>
+            <div class="form-group">
+              <label for="jumlahPerguruanTinggi">Jumlah Perguruan Tinggi</label>
+              <input type="number" id="jumlahPerguruanTinggi" name="jumlahPerguruanTinggi" min="0" placeholder="0">
+            </div>
           </div>
         </div>
+         
 
         <!-- BAGIAN 4: TEMPAT IBADAH -->
         <div class="section">
@@ -240,10 +245,33 @@
               <label for="jumlahKoperasi">Jumlah Koperasi</label>
               <input type="number" id="jumlahKoperasi" name="jumlahKoperasi" min="0" placeholder="0">
             </div>
+            
           </div>
         </div>
 
         <div class="btn-container">
+            <!-- BAGIAN 7: SARANA KESEHATAN -->
+        <div class="section">
+          <h2 class="section-title"><img class="section-icon" src="7.png" alt="">Sarana Kesehatan</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="jumlahPustu">Jumlah Pustu/Polindes</label>
+              <input type="number" id="jumlahPustu" name="jumlahPustu" min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label for="jumlahPosyandu">Jumlah Posyandu</label>
+              <input type="number" id="jumlahPosyandu" name="jumlahPosyandu" min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label for="jumlahPuskesmas">Jumlah Puskesmas</label>
+              <input type="number" id="jumlahPuskesmas" name="jumlahPuskesmas" min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label for="jumlahRumahSakit">Jumlah Rumah Sakit</label>
+              <input type="number" id="jumlahRumahSakit" name="jumlahRumahSakit" min="0" placeholder="0">
+            </div>
+
+          </div>
           <button type="submit" class="btn-primary">💾 Simpan Data</button>
           <button type="button" class="btn-secondary" onclick="resetForm()">🔄 Reset Form</button>
           <button type="button" class="btn-secondary" onclick="previewData()">👁️ Preview Data</button>
@@ -258,7 +286,7 @@
   </div>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw9spHiOYPzeD768ZXRgSV57Z26si6MKtt-Wzpbcv9kOA6nAUtRnhI7CxGuuIuqX7yjpA/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwGWJEGe6VfyeB7FZNyTbSO0468vz2d6sElDn_51nEfzwm_I0lE2t9_xorw-B0nqHyEpw/exec";
 
     // === Util umum ===
     function hitungTotal() {
