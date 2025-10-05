@@ -6,6 +6,35 @@
   <title>Data Penduduk Kecamatan Ngabang 2025</title>
   <style>
     
+    /* 📞 Teks terakhir - kontak petugas */
+.description .hubungi {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 1.15em;          /* sedikit lebih besar dari teks biasa */
+  font-weight: 600;
+  color: #0056b3;             /* biru khas pemerintah */
+  letter-spacing: 0.4px;
+  line-height: 1.6;
+  background: rgba(230, 243, 255, 0.8); /* lembut, buat kontras */
+  padding: 8px 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.description .hubungi b {
+  color: #002b63;             /* biru tua untuk menonjolkan kata penting */
+}
+
+@media (max-width: 768px) {
+  .description .hubungi {
+    display: block;
+    text-align: center;
+    font-size: 1.05em;
+    padding: 10px 12px;
+    margin-top: 12px;
+  }
+}
+
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -173,7 +202,9 @@
       <br><b>Perhatian! Harap periksa kembali data yang dimasukkan sebelum mengirim.</b>
       <br><b>Mohon diisi sesuai dokumen resmi.</b>
       <br><b>Data yang sudah dikirim tidak dapat diubah lagi.</b>
-      <br>Jika ada pertanyaan, silakan hubungi petugas desa atau kecamatan
+<br><span class="hubungi">📞 Jika ada pertanyaan, silakan hubungi <b>petugas desa</b> atau <b>kecamatan</b>.</span>
+
+
 
     </div>
 
@@ -324,12 +355,12 @@
             <label>Jenis Olahraga yang Ada</label>
             <div class="checkbox-grid">
               <div class="checkbox-item">
-                <input type="checkbox" id="Sepakbola" name="olahraga" value="Sepakbola">
-                <label for="Sepakbola">Sepak Bola</label>
+                <input type="checkbox" id="sepakbola" name="olahraga" value="sepakbola">
+                <label for="sepakbola">Sepak Bola</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="Bola Voli" name="olahraga" value="Bola Voli">
-                <label for="Bola Voli">Bola Voli</label>
+                <input type="checkbox" id="bolavoli" name="olahraga" value="bolavoli">
+                <label for="bolavoli">Bola Voli</label>
               </div>
               <div class="checkbox-item">
                 <input type="checkbox" id="olahragaLain" name="olahraga" value="lainnya" onchange="toggleCustomInput()">
@@ -513,5 +544,3 @@
   </script>
 </body>
 </html>
-
-
