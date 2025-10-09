@@ -5,6 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Data Penduduk Kecamatan Ngabang 2025</title>
   <style>
+    /* 🌈 Animasi gradiasi lembut berjalan di setiap bagian */
+@keyframes smoothGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌤️ Warna dasar dan efek untuk seluruh section */
+.section {
+  background-size: 200% 200%;
+  animation: smoothGradient 12s ease infinite;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  margin-bottom: 45px;
+}
+
+/* Efek hover elegan */
+.section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 120, 255, 0.15);
+}
+
+/* ✨ Warna khusus setiap bagian */
+.section:nth-of-type(1) { background: linear-gradient(135deg, #e8f2ff, #c7e0ff); } /* Data Umum */
+.section:nth-of-type(2) { background: linear-gradient(135deg, #d4ebff, #b8dbff); } /* Penduduk */
+.section:nth-of-type(3) { background: linear-gradient(135deg, #e0f3ff, #c1e6ff); } /* Pendidikan */
+.section:nth-of-type(4) { background: linear-gradient(135deg, #e3f1ff, #c4e3ff); } /* Tempat Ibadah */
+.section:nth-of-type(5) { background: linear-gradient(135deg, #e5f6ff, #b9e7ff); } /* Kesenian & Olahraga */
+.section:nth-of-type(6) { background: linear-gradient(135deg, #ebf7ff, #ccecff); } /* Data Tambahan */
+.section:nth-of-type(7) { background: linear-gradient(135deg, #e7f5ff, #b7e5ff); } /* Sarana Kesehatan */
+
+/* 💠 Perubahan warna border judul */
+.section-title {
+  border-bottom: 3px solid #007bff;
+  color: #003366;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 🧮 Tampilan khusus total penduduk */
+#totalPenduduk {
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #007bff, #00bfff);
+  box-shadow: 0 0 10px rgba(0,123,255,0.3);
+  border: none;
+  text-align: center;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+}
+#totalPenduduk:hover {
+  background: linear-gradient(135deg, #00aaff, #66ccff);
+  box-shadow: 0 0 15px rgba(0,150,255,0.5);
+  transform: scale(1.03);
+}
+
+/* 💨 Efek masuk setiap section (fade + slide) */
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.section {
+  animation: fadeSlideUp 0.8s ease both;
+}
+
     
     /* 📞 Teks terakhir - kontak petugas */
 .description .hubungi {
@@ -278,7 +344,7 @@
             </div>
             <div class="form-group">
               <label for="totalPenduduk">Total Penduduk</label>
-              <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(12, 182, 255, 0.8), rgba(12, 105, 255, 0.8));">
+              <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(0, 179, 255, 0.8), rgba(196, 214, 244, 0.8));">
             </div>
           </div>
         </div>
@@ -392,27 +458,29 @@
           </div>
         </div>
 
-        <div class="btn-container">
-            <!-- BAGIAN 7: SARANA KESEHATAN -->
-        <div class="section">
-          <h2 class="section-title"><img class="section-icon" src="7.png" alt="">Sarana Kesehatan</h2>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="jumlahPustu">Jumlah Pustu/Polindes</label>
-              <input type="number" id="jumlahPustu" name="jumlahPustu" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-              <label for="jumlahPosyandu">Jumlah Posyandu</label>
-              <input type="number" id="jumlahPosyandu" name="jumlahPosyandu" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-              <label for="jumlahPuskesmas">Jumlah Puskesmas</label>
-              <input type="number" id="jumlahPuskesmas" name="jumlahPuskesmas" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-              <label for="jumlahRumahSakit">Jumlah Rumah Sakit</label>
-              <input type="number" id="jumlahRumahSakit" name="jumlahRumahSakit" min="0" placeholder="0">
-            </div>
+     
+     <!-- BAGIAN 8: SARANA KESEHATAN -->
+<div class="section">
+  <h2 class="section-title"><img class="section-icon" src="7.png" alt="">Sarana Kesehatan</h2>
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="jumlahPustu">Jumlah Pustu/Polindes</label>
+      <input type="number" id="jumlahPustu" name="jumlahPustu" min="0" placeholder="0">
+    </div>
+    <div class="form-group">
+      <label for="jumlahPosyandu">Jumlah Posyandu</label>
+      <input type="number" id="jumlahPosyandu" name="jumlahPosyandu" min="0" placeholder="0">
+    </div>
+    <div class="form-group">
+      <label for="jumlahPuskesmas">Jumlah Puskesmas</label>
+      <input type="number" id="jumlahPuskesmas" name="jumlahPuskesmas" min="0" placeholder="0">
+    </div>
+    <div class="form-group">
+      <label for="jumlahRumahSakit">Jumlah Rumah Sakit</label>
+      <input type="number" id="jumlahRumahSakit" name="jumlahRumahSakit" min="0" placeholder="0">
+    </div>
+  </div>
+</div>
 
          <div class="btn-container">
   <button type="submit" class="btn-primary">💾 Simpan Data</button>
@@ -428,6 +496,50 @@
       </div>
     </div>
   </div>
+<!-- ❄️ Efek Salju Bergerak -->
+<style>
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: #ffffff;
+  font-size: 1.5em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9999;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0.6; }
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(40px); }
+}
+</style>
+
+<script>
+/* ❄️ Efek Salju Emoji ❄️ */
+const snowContainer = document.createDocumentFragment();
+
+for (let i = 0; i < 25; i++) { // jumlah salju
+  const snow = document.createElement("div");
+  snow.className = "snowflake";
+  snow.textContent = "❄️"; // bisa ganti ke "⛄" atau "🌨️"
+  snow.style.left = Math.random() * 100 + "vw";
+  snow.style.animationDuration = 5 + Math.random() * 10 + "s"; // kecepatan jatuh
+  snow.style.fontSize = 12 + Math.random() * 24 + "px"; // ukuran acak
+  snow.style.opacity = 0.4 + Math.random() * 0.6;
+  snow.style.animationDelay = Math.random() * 10 + "s";
+  snowContainer.appendChild(snow);
+}
+
+document.body.appendChild(snowContainer);
+</script>
 
   <script>
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwGWJEGe6VfyeB7FZNyTbSO0468vz2d6sElDn_51nEfzwm_I0lE2t9_xorw-B0nqHyEpw/exec";
@@ -545,6 +657,7 @@
   </script>
 </body>
 </html>
+
 
 
 
