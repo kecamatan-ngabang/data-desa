@@ -44,7 +44,7 @@
 /* 🎨 Gaya baru untuk judul setiap bagian */
 :root {
   --title-gradient-start: #7ac1ff;  /* bisa diganti sesuai keinginan */
-  --title-gradient-end: #011fb6;   /* bisa diganti sesuai keinginan */
+  --title-gradient-end: #248dfe;   /* bisa diganti sesuai keinginan */
 }
 
 .section-title {
@@ -212,6 +212,7 @@
   border-top: 2px solid #ecf0f1;
 }
 
+
 .btn-primary {
   background: linear-gradient(135deg, #007bff, #00c6ff);
   color: #fff;
@@ -279,9 +280,35 @@
     .description { background:#f4f7fb; border-left:5px solid #b3e1ff; padding:15px 20px; margin:15px 0; border-radius:8px; color:#333; }
     .description b { color:#ff1717; }
     @media (max-width:768px) { .form-container{ padding:20px; } .section{ padding:20px; } }
+
+    /* 🎥 Background Video */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* Biar video isi layar penuh tanpa distorsi */
+  z-index: -1;               /* Di belakang semua konten */
+  opacity: 0.25;             /* Transparansi agar form tetap jelas terlihat */
+  filter: brightness(0.9);   /* Bisa disesuaikan agar tidak terlalu terang */
+}
+
+/* Pastikan konten tetap terbaca di atas video */
+body {
+  position: relative;
+  z-index: 1;
+ 
+}
+
   </style>
 </head>
 <body>
+  <!-- 🎥 Background Video -->
+<video autoplay muted loop id="bgVideo">
+  <source src="bgvideo2.mp4" type="video/mp4">
+</video>
+
   <div class="container">
     <div class="header">
       <img src="logo_kabupaten_landak.png" alt="Logo Pemerintah" style="width:200px;height:auto;">
@@ -374,7 +401,7 @@
             </div>
             <div class="form-group">
               <label for="totalPenduduk">Total Penduduk</label>
-              <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(0, 129, 185, 0.8), rgba(196, 214, 244, 0.8));">
+              <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(6, 180, 255, 0.8), rgba(196, 214, 244, 0.8));">
             </div>
           </div>
         </div>
@@ -584,47 +611,7 @@
       </div>
     </div>
   </div>
-<!-- ❄️ Efek Salju Bergerak -->
-<style>
-.snowflake {
-  position: fixed;
-  top: -10px;
-  color: #ffffff;
-  font-size: 1.5em;
-  pointer-events: none;
-  user-select: none;
-  z-index: 9999;
-  animation-name: fall, sway;
-  animation-timing-function: linear, ease-in-out;
-  animation-iteration-count: infinite, infinite;
-}
 
-@keyframes fall {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0.6; }
-}
-
-@keyframes sway {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(40px); }
-}
-</style>
-
-<script>
-/* ❄️ Efek Salju Emoji ❄️ */
-const snowContainer = document.createDocumentFragment();
-
-for (let i = 0; i < 25; i++) { // jumlah salju
-  const snow = document.createElement("div");
-  snow.className = "snowflake";
-  snow.textContent = "🌤️🌨️"; // bisa ganti ke "⛄" atau "🌨️"
-  snow.style.left = Math.random() * 100 + "vw";
-  snow.style.animationDuration = 5 + Math.random() * 10 + "s"; // kecepatan jatuh
-  snow.style.fontSize = 12 + Math.random() * 24 + "px"; // ukuran acak
-  snow.style.opacity = 0.4 + Math.random() * 0.6;
-  snow.style.animationDelay = Math.random() * 10 + "s";
-  snowContainer.appendChild(snow);
-}
 
 document.body.appendChild(snowContainer);
 </script>
