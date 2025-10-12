@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sistem Digitalisasi Data Penduduk Kecamatan Ngabang Tahun 2025</title>
+  <title>Data Penduduk Kecamatan Ngabang 2025</title>
   <style>
     /* 🌈 Animasi gradiasi lembut berjalan di setiap bagian */
 @keyframes smoothGradient {
@@ -41,11 +41,39 @@
 .section:nth-of-type(9) { background: linear-gradient(135deg, #e7f5ff, #86ff23); } /* Penerima PKH */
 
 /* 💠 Perubahan warna border judul */
-.section-title {
-  border-bottom: 3px solid #007bff;
-  color: #003366;
-  text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+/* 🎨 Gaya baru untuk judul setiap bagian */
+:root {
+  --title-gradient-start: #7ac1ff;  /* bisa diganti sesuai keinginan */
+  --title-gradient-end: #011fb6;   /* bisa diganti sesuai keinginan */
 }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #1c2e4a;
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, var(--title-gradient-start), var(--title-gradient-end));
+  border: 1px solid rgba(0, 123, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.section-title:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 123, 255, 0.25);
+}
+
+.section-icon {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
 
 /* 🧮 Tampilan khusus total penduduk */
 #totalPenduduk {
@@ -346,7 +374,7 @@
             </div>
             <div class="form-group">
               <label for="totalPenduduk">Total Penduduk</label>
-              <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(0, 179, 255, 0.8), rgba(196, 214, 244, 0.8));">
+              <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(0, 129, 185, 0.8), rgba(196, 214, 244, 0.8));">
             </div>
           </div>
         </div>
@@ -589,7 +617,7 @@ const snowContainer = document.createDocumentFragment();
 for (let i = 0; i < 25; i++) { // jumlah salju
   const snow = document.createElement("div");
   snow.className = "snowflake";
-  snow.textContent = "⛅"; // bisa ganti ke "⛄" atau "🌨️"
+  snow.textContent = "🌤️🌨️"; // bisa ganti ke "⛄" atau "🌨️"
   snow.style.left = Math.random() * 100 + "vw";
   snow.style.animationDuration = 5 + Math.random() * 10 + "s"; // kecepatan jatuh
   snow.style.fontSize = 12 + Math.random() * 24 + "px"; // ukuran acak
@@ -717,10 +745,6 @@ document.body.appendChild(snowContainer);
   </script>
 </body>
 </html>
-
-
-
-
 
 
 
