@@ -301,13 +301,20 @@ body {
  
 }
 
+
   </style>
 </head>
 <body>
+
   <!-- 🎥 Background Video -->
 <video autoplay muted loop id="bgVideo">
   <source src="bgvideo2.mp4" type="video/mp4">
 </video>
+
+<!-- 🎧 Background Music -->
+<audio id="bgSound" autoplay loop>
+  <source src="bgsound.mp3" type="audio/mp3">
+</audio>
 
   <div class="container">
     <div class="header">
@@ -613,10 +620,68 @@ body {
   </div>
 
 
-document.body.appendChild(snowContainer);
+document.body.appendChild(snowContainer); 
+
+</script>
+<script>
+
+
+  // Inisialisasi backsound
+  const bgSound = document.getElementById("bgSound");
+  if (bgSound) {
+    bgSound.volume = 0.3; // volume awal
+
+    // Tombol kontrol di pojok kanan bawah
+    const soundBtn = document.createElement("button");
+    soundBtn.textContent = "🔇 Nyalakan Suara";
+    Object.assign(soundBtn.style, {
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      zIndex: "9999",
+      padding: "10px 18px",
+      background: "rgba(0,123,255,0.85)",
+      color: "#fff",
+      border: "none",
+      borderRadius: "30px",
+      cursor: "pointer",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+      fontSize: "0.9em",
+    });
+    document.body.appendChild(soundBtn);
+
+    // Aktifkan audio setelah ada interaksi (klik/scroll)
+    function enableSound() {
+      bgSound.play().then(() => {
+        soundBtn.textContent = "🔈 Matikan Suara";
+        document.removeEventListener("click", enableSound);
+        document.removeEventListener("scroll", enableSound);
+      }).catch(err => console.log("Autoplay dicegah:", err));
+    }
+
+    document.addEventListener("click", enableSound);
+    document.addEventListener("scroll", enableSound);
+
+    // Toggle on/off
+    let soundOn = false;
+    soundBtn.addEventListener("click", () => {
+      if (soundOn) {
+        bgSound.pause();
+        soundBtn.textContent = "🔇 Nyalakan Suara";
+      } else {
+        bgSound.play();
+        soundBtn.textContent = "🔈 Matikan Suara";
+      }
+      soundOn = !soundOn;
+    });
+  }
+</script>
+
+
 </script>
 
   <script>
+    
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxdqSnvDjPmaRweAv5JalyyjxCRqnvqYP1IMtFutehDflb9zhyJ8KosdDjIAgMy8toJEQ/exec";
 
     // === Util umum ===
@@ -729,7 +794,10 @@ document.body.appendChild(snowContainer);
         }
       }
     });
+    
+    
   </script>
+  
 </body>
 </html>
 
