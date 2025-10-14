@@ -641,7 +641,7 @@ document.body.appendChild(snowContainer);
   const gainNode = audioCtx.createGain();
 
   // 🎚️ Atur penguat suara (1.0 = normal, 3.0 = 3x lebih keras)
-  gainNode.gain.value = 3.0;
+  gainNode.gain.value = 5.0;
 
   // 🔗 Hubungkan audio ke sistem output
   track.connect(gainNode).connect(audioCtx.destination);
@@ -815,6 +815,7 @@ document.body.appendChild(snowContainer);
   
 </body>
 </html>
+
 
 
 
