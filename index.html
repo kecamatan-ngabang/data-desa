@@ -764,7 +764,7 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
         try { json = await res.json(); } catch(e) {}
 
         if (res.ok && json.ok) {
-          alert('✅ Data berhasil dikirim ke Spreadsheet!\n\nDesa: ' + (data.desa || '-'));
+          alert('📬 Data berhasil dikirim ke Spreadsheet!\n\nDesa: ' + (data.desa || '-'));
           // Reset form
           this.reset();
           document.getElementById('customOlahraga').style.display = 'none';
@@ -807,6 +807,7 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
   
 </body>
 </html>
+
 
 
 
