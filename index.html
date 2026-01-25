@@ -10,6 +10,102 @@
   <link rel="icon" type="image/png" href="faviicon.png">
   <style>
     
+    /* === NOTIFIKASI HOLOGRAM === */
+.holo-alert {
+  position: fixed;
+  top: -100px; /* Sembunyi di atas layar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20000; /* Paling atas */
+  
+  /* Gaya Kaca Gelap */
+  background: rgba(10, 15, 30, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  /* Border & Glow Default (Merah Error) */
+  border: 1px solid #ff0055;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+  border-left: 5px solid #ff0055; /* Aksen kiri tebal */
+  
+  padding: 15px 25px;
+  min-width: 300px;
+  border-radius: 4px;
+  
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  
+  transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek membal */
+}
+
+/* Jika Sukses (Ganti warna jadi Cyan/Hijau) */
+.holo-alert.success {
+  border-color: #00f3ff;
+  border-left-color: #00f3ff;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+}
+
+.holo-alert.success #holoIcon, 
+.holo-alert.success #holoText {
+  color: #00f3ff;
+  text-shadow: 0 0 5px #00f3ff;
+}
+
+/* Teks & Ikon */
+#holoIcon {
+  font-size: 1.5em;
+  color: #ff0055;
+  filter: drop-shadow(0 0 5px #ff0055);
+}
+
+#holoText {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9em;
+  color: #ff0055;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 0 0 5px #ff0055;
+}
+
+/* Class untuk memunculkan notif */
+.holo-alert.show {
+  top: 30px; /* Muncul ke bawah */
+}
+
+    /* === JUDUL SUB-HEADER FUTURISTIK === */
+/* === GANTI BAGIAN CSS INI SAJA === */
+    .futuristic-subtitle {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      
+      /* 👇 BAGIAN PENTING UNTUK JARAK 👇 */
+      display: block;       /* Agar elemen mengisi satu baris penuh */
+      margin-top: 10px;     /* Jarak dari teks "AKSES PORTAL" */
+      margin-bottom: 40px;  /* Jarak ke kolom "Identifikasi Pengguna" (Satu baris kosong) */
+      
+      /* 🔥 Gradasi Es (Icy Blue) 🔥 */
+      background: linear-gradient(180deg, #ffffff 20%, #ccf9ff 60%, #09c0e9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      
+      /* Efek Glow */
+      filter: drop-shadow(0 0 5px rgba(115, 0, 255, 0.5)) 
+              drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+              
+      
+    }
+
+@keyframes pulseText {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.5)); }
+  50% { transform: scale(1.02); filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.9)); }
+}
+
     /* 🌈 Animasi gradiasi lembut berjalan di setiap bagian */
 @keyframes smoothGradient {
   0% { background-position: 0% 50%; }
@@ -25,7 +121,7 @@
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.4s ease;
-  margin-bottom: 45px;
+  margin-bottom: 5px;
 }
 
 /* Efek hover elegan */
@@ -308,7 +404,18 @@ body {
 /* =========================================
      🔥 GAYA LOGIN FUTURISTIK (REVISI) 🔥
      ========================================= */
-  
+  /* === EFEK KOLOM ERROR === */
+.input-error {
+  border-color: #ff0055 !important;
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.5) !important;
+  animation: shakeInput 0.3s ease-in-out !important;
+}
+
+@keyframes shakeInput {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
   /* 1. LATAR BELAKANG BERGERAK (GRID MATRIX) */
   #loginOverlay {
     position: fixed;
@@ -459,7 +566,35 @@ body {
   }
   
   select.login-input option { background: #000; color: #fff; }
+/* === TOMBOL LIHAT SANDI (MATA) === */
+  .password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px; /* Jarak ke tombol login */
+  }
 
+  /* Pastikan input di dalam wrapper tidak punya margin bawah ganda */
+  .password-wrapper .login-input {
+    margin-bottom: 0; 
+    padding-right: 45px; /* Beri ruang agar teks tidak tertutup ikon mata */
+  }
+
+  .eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%); /* Posisi tengah vertikal */
+    cursor: pointer;
+    font-size: 1.2em;
+    filter: grayscale(100%) brightness(200%); /* Awalnya putih/abu */
+    transition: 0.3s;
+    user-select: none; /* Agar ikon tidak terblok saat diklik */
+  }
+
+  .eye-icon:hover {
+    filter: drop-shadow(0 0 5px #00f3ff); /* Efek glow saat disentuh */
+    transform: translateY(-50%) scale(1.1);
+  }
   /* 6. TOMBOL LOGIN */
   .btn-login {
     width: 100%;
@@ -506,6 +641,12 @@ body {
   </style>
 </head>
 <body>
+
+  <div id="holoAlert" class="holo-alert">
+  <span id="holoIcon">⚠️</span>
+  <span id="holoText">SYSTEM ERROR</span>
+
+</div>
 <div id="loginOverlay">
   <div class="login-box">
     
@@ -515,8 +656,9 @@ body {
     </div>
 
     <h2 class="login-title">AKSES PORTAL</h2>
-       <h2><b style="font-size: 1.2em;color:#ffffff;font-family: 'Bradley Hand ITC', cursive;">Input Data Penduduk Tahun 2025</b></h2>
-    
+<h2>
+  <span class="futuristic-subtitle">Input Data Penduduk Tahun 2025</span>
+</h2>    
     <select id="loginUser" class="login-input">
       <option value="" disabled selected>Identifikasi Pengguna</option>
       <option value="camat">PIMPINAN (Camat)</option>
@@ -544,7 +686,10 @@ body {
       </optgroup>
     </select>
     
-    <input type="password" id="loginPass" class="login-input" placeholder="Masukkan Sandi">
+<div class="password-wrapper">
+  <input type="password" id="loginPass" class="login-input" placeholder="Kata Sandi">
+  <span id="toggleBtn" class="eye-icon" onclick="togglePassword()">🔒</span>
+</div>
     
     <button class="btn-login" onclick="prosesLogin()">LOGIN</button>
   </div>
@@ -925,14 +1070,80 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
 </script>
 
 </div> </div> <script>
+  // === FUNGSI LIHAT/SEMBUNYIKAN SANDI ===
+  function togglePassword() {
+    const passInput = document.getElementById("loginPass");
+    const icon = document.getElementById("toggleBtn");
+    
+    if (passInput.type === "password") {
+      passInput.type = "text";  // Ubah jadi teks biasa (terlihat)
+      icon.innerHTML = "🔓";    // Ganti ikon jadi gembok terbuka/mata coret
+      icon.style.filter = "drop-shadow(0 0 8px #00f3ff)"; // Glow aktif
+    } else {
+      passInput.type = "password"; // Ubah balik jadi titik-titik
+      icon.innerHTML = "🔒";      // Ganti ikon balik jadi mata
+      icon.style.filter = "grayscale(100%) brightness(200%)"; // Glow mati
+    }
+  }
   // 👇 TEMPEL KODE JAVASCRIPT LOGIN (function prosesLogin) DI SINI 👇
-  
-  // === LOGIKA LOGIN BARU ===
+    // === LOGIKA LOGIN BARU ===
+// === FUNGSI MENAMPILKAN NOTIFIKASI KEREN ===
+  function showHoloAlert(message, type = 'error') {
+    const alertBox = document.getElementById('holoAlert');
+    const alertText = document.getElementById('holoText');
+    const alertIcon = document.getElementById('holoIcon');
+    
+    // Set Pesan
+    alertText.innerText = message;
+    
+    if (type === 'success') {
+      alertBox.classList.add('success');
+      alertIcon.innerHTML = "✅"; // Ikon Centang
+      // Mainkan suara sukses (opsional, jika ada file sound)
+    } else {
+      alertBox.classList.remove('success');
+      alertIcon.innerHTML = "⚠️"; // Ikon Warning
+      
+      // Efek getar pada form login jika error
+      const loginBox = document.querySelector('.login-box');
+      loginBox.style.animation = 'none';
+      loginBox.offsetHeight; /* trigger reflow */
+      loginBox.style.animation = 'shake 0.4s ease'; 
+    }
+    
+    // Munculkan Notif
+    alertBox.classList.add('show');
+    
+    // Hilangkan otomatis setelah 3 detik
+    setTimeout(() => {
+      alertBox.classList.remove('show');
+    }, 3000);
+  }
+
+  // Tambahkan animasi getar di CSS via JS
+  const styleSheet = document.createElement("style");
+  styleSheet.innerText = `
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
+
+
+  // === LOGIKA LOGIN BARU (DENGAN NOTIF MODERN) ===
   function prosesLogin() {
     const user = document.getElementById('loginUser').value;
     const pass = document.getElementById('loginPass').value.trim();
     
-    if (!user) { alert("Silakan pilih identitas pengguna!"); return; }
+    // GANTI alert biasa dengan showHoloAlert
+    if (!user) { 
+      showHoloAlert("IDENTITAS BELUM DIPILIH!"); 
+      return; 
+    }
 
     let valid = false;
     let roleName = "";
@@ -947,49 +1158,49 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
     } 
     // 3. Cek Desa (Sandi: "desa [nama]1234")
     else {
-      // Rumus sandi: "desa " + nama desa (huruf kecil) + "1234"
       const sandiSeharusnya = "desa " + user.toLowerCase() + "1234";
       if (pass === sandiSeharusnya) { valid = true; roleName = "Admin Desa " + user; }
     }
 
     if (valid) {
-      // Buka Gerbang
-      document.getElementById('loginOverlay').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
+      // Tampilkan Notif Sukses Dulu
+      showHoloAlert("AKSES DITERIMA: " + roleName, "success");
       
-      // Putar musik (karena user sudah klik tombol)
-      const audio = document.getElementById('bgSound');
-      if(audio) audio.play().catch(e => console.log(e));
+      // Beri jeda 1.5 detik agar notif terlihat sebelum masuk
+      setTimeout(() => {
+        document.getElementById('loginOverlay').style.transition = "opacity 0.5s";
+        document.getElementById('loginOverlay').style.opacity = "0";
+        
+        setTimeout(() => {
+          document.getElementById('loginOverlay').style.display = 'none';
+          document.getElementById('mainContent').style.display = 'block';
+          
+          // Putar musik
+          const audio = document.getElementById('bgSound');
+          if(audio) audio.play().catch(e => console.log(e));
 
-      // KUNCI DESA (Jika yang login adalah Desa)
-      const selectDesa = document.getElementById('desa');
-      if (user !== 'camat' && user !== 'staff') {
-        selectDesa.value = user;       // Set otomatis nama desa
-        selectDesa.style.pointerEvents = "none"; // Tidak bisa diklik
-        selectDesa.style.background = "#e9ecef"; // Warna abu-abu
-        
-        // Buat input hidden agar data tetap terkirim meski select 'read-only'
-        const form = document.getElementById('populationForm');
-        let hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "desa";
-        hiddenInput.value = user;
-        form.appendChild(hiddenInput);
-        
-        // Hapus atribut name dari select asli agar tidak duplikat
-        selectDesa.removeAttribute("name");
-      }
-      
-      alert("Selamat Datang, " + roleName + "!");
+          // KUNCI DESA
+          const selectDesa = document.getElementById('desa');
+          if (user !== 'camat' && user !== 'staff') {
+            selectDesa.value = user; 
+            selectDesa.style.pointerEvents = "none"; 
+            selectDesa.style.background = "#e9ecef";
+            
+            const form = document.getElementById('populationForm');
+            let hiddenInput = document.createElement("input");
+            hiddenInput.type = "hidden"; hiddenInput.name = "desa"; hiddenInput.value = user;
+            form.appendChild(hiddenInput);
+            selectDesa.removeAttribute("name");
+          }
+        }, 500); // Waktu transisi fade out
+      }, 1500); // Waktu tunggu notif sukses
+
     } else {
-      alert("❌ Kata Sandi Salah! Harap periksa kembali.");
+      // Tampilkan Notif Error Keren
+      showHoloAlert("AKSES DITOLAK: KATA SANDI SALAH");
       document.getElementById('loginPass').value = "";
     }
   }
-  // 👆 AKHIR KODE LOGIN 👆
-
-
-  // ... sisa kode script lama (hitungTotal, dll) ...
 </script>
 
   <script>
@@ -1050,37 +1261,116 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
       document.getElementById('dataPreview').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // === Kirim ke Apps Script (tanpa header JSON -> simple request, non-preflight) ===
-    document.getElementById('populationForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const data = collectFormData();
+// === LOGIKA PENGIRIMAN UTAMA (VALIDASI KHUSUS OLAHRAGA & FORMULIR) ===
+  document.getElementById('populationForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); 
+    
+    const form = this;
+    const btn = document.querySelector('.btn-primary');
+    
+    // --- 1. SCANNING DATA (Hanya pada form penduduk, bukan login) ---
+    const allInputs = form.querySelectorAll('input, select, textarea');
+    
+    let isValid = true;
+    let firstInvalid = null;
 
-      // Simpan backup lokal (opsional)
-      localStorage.setItem('dataPenduduk_' + (data.desa || 'tanpa_desa') + '_2025', JSON.stringify(data));
+    allInputs.forEach(input => {
+      // Reset status error dulu
+      input.classList.remove('input-error');
 
-      try {
-        const res = await fetch(WEB_APP_URL, {
-          method: "POST",
-          // Jangan set Content-Type application/json agar request tetap "simple" (tidak preflight)
-          body: JSON.stringify(data)
-        });
+      // === ATURAN KHUSUS (FILTER) ===
+      
+      // A. Jangan cek tombol
+      if (input.type === 'submit' || input.type === 'button') return;
 
-        let json = {};
-        try { json = await res.json(); } catch(e) {}
+      // B. KHUSUS OLAHRAGA & CHECKBOX:
+      // Semua Checkbox (Sepakbola, Voli, Lainnya) bersifat OPSIONAL (Boleh kosong)
+      if (input.type === 'checkbox') return;
 
-        if (res.ok && json.ok) {
-          alert('📬 Data berhasil dikirim ke Spreadsheet!\n\nDesa: ' + (data.desa || '-'));
-          // Reset form
-          this.reset();
-          document.getElementById('customOlahraga').style.display = 'none';
-          document.getElementById('dataPreview').style.display = 'none';
-        } else {
-          alert('⚠️ Gagal menyimpan ke Spreadsheet. Disimpan lokal dulu.\nDetail: ' + (json.error || res.status));
-        }
-      } catch (err) {
-        alert('⚠️ Tidak bisa terhubung ke server. Data disimpan lokal dulu.\n' + err);
+      // C. KHUSUS KOLOM "LAINNYA" (Text Input):
+      // Jika kolom sedang disembunyikan (artinya checkbox "Lainnya" tidak dicentang),
+      // maka kolom ini TIDAK WAJIB diisi. Lewati saja.
+      if (input.style.display === 'none' || input.offsetParent === null) return;
+
+      // === VALIDASI UMUM ===
+      // Selain pengecualian di atas, jika kolom kosong -> Error
+      if (!input.value.trim()) {
+        isValid = false;
+        input.classList.add('input-error'); // Nyalakan merah
+        if (!firstInvalid) firstInvalid = input; 
       }
     });
+
+    // --- 2. JIKA ADA YANG BELUM DIISI ---
+    if (!isValid) {
+      showHoloAlert("GAGAL: HARAP LENGKAPI KOLOM BERWARNA MERAH!");
+      
+      if (firstInvalid) {
+        firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+        firstInvalid.focus();
+        
+        // Cek apakah yang error adalah kolom Olahraga Lainnya
+        if (firstInvalid.id === 'customOlahraga') {
+           showHoloAlert("MOHON ISI NAMA OLAHRAGA LAINNYA");
+        }
+      }
+      return; // Stop proses
+    }
+
+    // --- 3. JIKA AMAN, KIRIM DATA ---
+    const data = collectFormData();
+    localStorage.setItem('dataPenduduk_' + (data.desa || 'tanpa_desa') + '_2025', JSON.stringify(data));
+
+    // Animasi Tombol
+    const originalText = btn.textContent;
+    btn.innerHTML = "MENGIRIM DATA..."; 
+    btn.style.background = "linear-gradient(90deg, #333, #555, #333)";
+    btn.style.backgroundSize = "200% 100%";
+    btn.style.animation = "bgScroll 2s infinite linear";
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.ok) {
+        showHoloAlert('SUKSES: DATA TELAH TERSIMPAN', 'success');
+        
+        // Logika Reset Form (Pertahankan Desa jika terkunci)
+        const desaSelect = document.getElementById('desa');
+        const isLocked = desaSelect.disabled || desaSelect.style.pointerEvents === "none";
+        const savedDesa = desaSelect.value;
+        
+        form.reset(); // Kosongkan form
+        
+        if (isLocked) { desaSelect.value = savedDesa; } // Balikin nama desa admin
+
+        // Sembunyikan kembali input olahraga lainnya
+        document.getElementById('customOlahraga').style.display = 'none';
+        document.getElementById('dataPreview').style.display = 'none';
+
+      } else {
+        throw new Error(json.error || "Server Error");
+      }
+
+    } catch (err) {
+      console.error(err);
+      showHoloAlert('KONEKSI GAGAL: DATA DISIMPAN LOKAL');
+    } finally {
+      // Kembalikan tombol
+      btn.innerHTML = originalText; 
+      btn.style.background = ""; 
+      btn.style.animation = "";
+      btn.disabled = false;
+      
+      // Hilangkan merah-merah
+      allInputs.forEach(i => i.classList.remove('input-error'));
+    }
+  });
 
     // Auto-save draft tiap 30 detik
     setInterval(function() {
@@ -1106,11 +1396,6 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
         }
       }
     });
-    
-    
-    
-  </script>
-  
-  
+</script>
 </body>
 </html>
