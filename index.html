@@ -786,23 +786,27 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
         </div>
 
         <!-- BAGIAN 2: DATA PENDUDUK -->
-        <div class="section">
-          <h2 class="section-title"><img class="section-icon" src="112.png" alt="">Data Penduduk</h2>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="pendudukLaki">Jumlah Penduduk Laki-laki</label>
-              <input type="number" id="pendudukLaki" name="pendudukLaki" min="0" placeholder="0" oninput="hitungTotal()">
-            </div>
-            <div class="form-group">
-              <label for="pendudukPerempuan">Jumlah Penduduk Perempuan</label>
-              <input type="number" id="pendudukPerempuan" name="pendudukPerempuan" min="0" placeholder="0" oninput="hitungTotal()">
-            </div>
-            <div class="form-group">
-              <label for="totalPenduduk">Total Penduduk</label>
-              <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(6, 180, 255, 0.8), rgba(196, 214, 244, 0.8));">
-            </div>
-          </div>
-        </div>
+      <div class="section">
+  <h2 class="section-title"><img class="section-icon" src="112.png" alt="">Data Penduduk</h2>
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="jumlahKK">Jumlah Kartu Keluarga (KK)</label>
+      <input type="number" id="jumlahKK" name="jumlahKK" min="0" placeholder="0">
+    </div>
+    <div class="form-group">
+      <label for="pendudukLaki">Jumlah Penduduk Laki-laki</label>
+      <input type="number" id="pendudukLaki" name="pendudukLaki" min="0" placeholder="0" oninput="hitungTotal()">
+    </div>
+    <div class="form-group">
+      <label for="pendudukPerempuan">Jumlah Penduduk Perempuan</label>
+      <input type="number" id="pendudukPerempuan" name="pendudukPerempuan" min="0" placeholder="0" oninput="hitungTotal()">
+    </div>
+    <div class="form-group">
+      <label for="totalPenduduk">Total Penduduk</label>
+      <input type="number" id="totalPenduduk" name="totalPenduduk" readonly style="background:linear-gradient(135deg, rgba(6, 180, 255, 0.8), rgba(196, 214, 244, 0.8));">
+    </div>
+  </div>
+</div>
 
         <!-- BAGIAN 3: LEMBAGA PENDIDIKAN -->
         <div class="section">
@@ -1135,77 +1139,105 @@ Tujuannya adalah mewujudkan basis data penduduk yang akurat, terintegrasi, dan m
 
 
   // === LOGIKA LOGIN BARU (DENGAN NOTIF MODERN) ===
-  function prosesLogin() {
-    const user = document.getElementById('loginUser').value;
-    const pass = document.getElementById('loginPass').value.trim();
-    
-    // GANTI alert biasa dengan showHoloAlert
-    if (!user) { 
-      showHoloAlert("IDENTITAS BELUM DIPILIH!"); 
-      return; 
+function prosesLogin() {
+  const user = document.getElementById('loginUser').value;
+  const pass = document.getElementById('loginPass').value.trim();
+  
+  if (!user) { 
+    showHoloAlert("IDENTITAS BELUM DIPILIH!"); 
+    return; 
+  }
+
+  // === DATABASE KODE AKSES DESA (6 DIGIT ACAK) ===
+  const daftarSandiDesa = {
+    "Amang": "482193",
+    "Ambarang": "721054",
+    "Amboyo Inti": "339481",
+    "Amboyo Selatan": "882301",
+    "Amboyo Utara": "154627",
+    "Antan Rayan": "662910",
+    "Engkadu": "294105",
+    "Hilir Kantor": "553812",
+    "Hilir Tengah": "901243",
+    "Mungguk": "447120",
+    "Muun": "318594",
+    "Pak Mayam": "772315",
+    "Penyaho Dangku": "105682",
+    "Raja": "824930",
+    "Rasan": "551029",
+    "Sebirang": "334176",
+    "Sungai Keli": "619284",
+    "Tebedak": "228471",
+    "Temiang Sawi": "993102"
+  };
+
+  let valid = false;
+  let roleName = "";
+
+  // 1. Cek Login Khusus Atasan & Staff
+  if (user === 'camat') {
+    if (pass === '778899') { // Diubah menjadi 6 digit juga agar seragam
+      valid = true; 
+      roleName = "Bapak Camat"; 
     }
-
-    let valid = false;
-    let roleName = "";
-
-    // 1. Cek Atasan (Camat)
-    if (user === 'camat') {
-      if (pass === 'camat_ngabang12345') { valid = true; roleName = "Bapak Camat"; }
-    } 
-    // 2. Cek Staff
-    else if (user === 'staff') {
-      if (pass === 'staff_admin1234') { valid = true; roleName = "Staff Admin"; }
-    } 
-    // 3. Cek Desa (Sandi: "desa [nama]1234")
-    else {
-      const sandiSeharusnya = "desa " + user.toLowerCase() + "1234";
-      if (pass === sandiSeharusnya) { valid = true; roleName = "Admin Desa " + user; }
+  } 
+  else if (user === 'staff') {
+    if (pass === '112233') { 
+      valid = true; 
+      roleName = "Staff Admin"; 
     }
-
-    if (valid) {
-      // Tampilkan Notif Sukses Dulu
-      showHoloAlert("AKSES DITERIMA: " + roleName, "success");
-      
-      // Beri jeda 1.5 detik agar notif terlihat sebelum masuk
-      setTimeout(() => {
-        document.getElementById('loginOverlay').style.transition = "opacity 0.5s";
-        document.getElementById('loginOverlay').style.opacity = "0";
-        
-        setTimeout(() => {
-          document.getElementById('loginOverlay').style.display = 'none';
-          document.getElementById('mainContent').style.display = 'block';
-          
-          // Putar musik
-          const audio = document.getElementById('bgSound');
-          if(audio) audio.play().catch(e => console.log(e));
-
-          // KUNCI DESA
-          const selectDesa = document.getElementById('desa');
-          if (user !== 'camat' && user !== 'staff') {
-            selectDesa.value = user; 
-            selectDesa.style.pointerEvents = "none"; 
-            selectDesa.style.background = "#e9ecef";
-            
-            const form = document.getElementById('populationForm');
-            let hiddenInput = document.createElement("input");
-            hiddenInput.type = "hidden"; hiddenInput.name = "desa"; hiddenInput.value = user;
-            form.appendChild(hiddenInput);
-            selectDesa.removeAttribute("name");
-          }
-        }, 500); // Waktu transisi fade out
-      }, 1500); // Waktu tunggu notif sukses
-
-    } else {
-      // Tampilkan Notif Error Keren
-      showHoloAlert("AKSES DITOLAK: KATA SANDI SALAH");
-      document.getElementById('loginPass').value = "";
+  } 
+  // 2. Cek Login Desa menggunakan Mapping di atas
+  else {
+    if (pass === daftarSandiDesa[user]) {
+      valid = true; 
+      roleName = "Admin Desa " + user; 
     }
   }
+
+  if (valid) {
+    showHoloAlert("AKSES DITERIMA: " + roleName, "success");
+    
+    setTimeout(() => {
+      document.getElementById('loginOverlay').style.transition = "opacity 0.5s";
+      document.getElementById('loginOverlay').style.opacity = "0";
+      
+      setTimeout(() => {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        
+        const audio = document.getElementById('bgSound');
+        if(audio) audio.play().catch(e => console.log(e));
+
+        // KUNCI DESA AGAR TIDAK BISA DIUBAH
+        const selectDesa = document.getElementById('desa');
+        if (user !== 'camat' && user !== 'staff') {
+          selectDesa.value = user; 
+          selectDesa.style.pointerEvents = "none"; 
+          selectDesa.style.background = "#e9ecef";
+          
+          // Pastikan data yang terkirim ke server adalah desa yang login
+          const form = document.getElementById('populationForm');
+          let hiddenInput = document.createElement("input");
+          hiddenInput.type = "hidden"; 
+          hiddenInput.name = "desa"; 
+          hiddenInput.value = user;
+          form.appendChild(hiddenInput);
+          selectDesa.removeAttribute("name");
+        }
+      }, 500);
+    }, 1500);
+
+  } else {
+    showHoloAlert("AKSES DITOLAK: KODE SANDI SALAH");
+    document.getElementById('loginPass').value = "";
+  }
+}
 </script>
 
   <script>
     
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyqrVkg2x8kXMQpzlcK4JKoyQbVoINcqF8Jazl5HkgZsqiFoQ2fqjKF1r7e3IdvH4RsfQ/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxzdJiMCvoTth6F3Zo4St-Zl42RrTeXD8X-fbB373fxEXMy6RWP8mB_LV2PuCchkrtaGQ/exec";
 
     // === Util umum ===
     function hitungTotal() {
