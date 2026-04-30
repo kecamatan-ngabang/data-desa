@@ -1361,9 +1361,13 @@ function prosesLogin() {
     btn.style.animation = "bgScroll 2s infinite linear";
     btn.disabled = true;
 
-    try {
+try {
       const res = await fetch(WEB_APP_URL, {
         method: "POST",
+        // 👇 TAMBAHKAN HEADER INI UNTUK BYPASS BLOKIR CORS GOOGLE 👇
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
         body: JSON.stringify(data)
       });
 
